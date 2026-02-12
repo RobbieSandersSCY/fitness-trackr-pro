@@ -7,10 +7,8 @@ import { BrowserRouter } from "react-router";
 
 createRoot(document.getElementById("root")).render(
   <AuthProvider>
-    <PageProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </PageProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </AuthProvider>,
 );
