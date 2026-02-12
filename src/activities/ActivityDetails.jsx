@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
+import { useNavigate } from "react-router";
 // Activity in ActivityList link to own page
 // move delete button to new details page
 // after delete, user is redirected to actList
@@ -7,8 +8,20 @@ import { useAuth } from "../auth/AuthContext";
 export default function ActivityDetails() {
   const { token } = useAuth;
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   // data is fetched from API
   // use dynamic segment for actID
+
+  const tryDelete = async () => {
+    setError(null);
+
+    try {
+      await deleteActivity(token, activity.id);
+      navigate("/activities");
+    } catch (e) {
+      setError(e.message);
+    }
+  };
 
   // Page displays name, desc, creator
   return (
@@ -21,26 +34,3 @@ export default function ActivityDetails() {
     </article>
   );
 }
-
-// function ActivityListItem({ activity, syncActivities }) {
-//   const { token } = useAuth();
-
-//   const [error, setError] = useState(null);
-
-//   const tryDelete = async () => {
-//     setError(null);
-
-//     try {
-//       await deleteActivity(token, activity.id);
-//       syncActivities();
-//     } catch (e) {
-//       setError(e.message);
-//     }
-//   };
-
-//   return (
-//     <li>
-//       <p>{activity.name}</p>
-//     </li>
-//   );
-// }
