@@ -14,7 +14,7 @@ export default function ActivityList({ activities }) {
 function ActivityListItem({ activity }) {
   return (
     <li>
-      <Link to={"/activities/" + activity.id}>{activity.id}</Link>
+      <Link to={"/activities/" + activity.id}>{activity.name}</Link>
     </li>
   );
 }
